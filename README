@@ -1,0 +1,105 @@
+NAME
+    Apache::AuthNetLDAP - mod_perl module that uses the Net::LDAP
+    module for user authentication for Apache
+
+SYNOPSIS
+     AuthName "LDAP Test Auth"
+     AuthType Basic
+
+     #only set the next two if you need to bind as a user for searching
+     #PerlSetVar BindDN "uid=user1,ou=people,o=acme.com" #optional
+     #PerlSetVar BindPWD "password" #optional
+     PerlSetVar BaseDN "ou=people,o=acme.com"
+     PerlSetVar LDAPServer ldap.acme.com
+     PerlSetVar LDAPPort 389
+     #PerlSetVar UIDAttr uid
+     PerlSetVar UIDAttr mail
+
+     require valid-user
+
+     PerlAuthenHandler Apache::AuthNetLDAP
+
+DESCRIPTION
+    This module authenticates users via LDAP using the Net::LDAP
+    module. This module is Graham Barr's "pure" Perl LDAP API.
+
+    It also uses all of the same parameters as the
+    Apache::AuthPerLDAP, but I have added two extra parameters.
+
+    The parameters are:
+
+    PerlSetVar BindDN
+        Used to set initial LDAP user.
+
+    PerlSetVar BindPWD
+        Used to set initial LDAP password.
+
+    PerlSetVar BaseDN
+        This sets the search base used when looking up a user in an
+        LDAP server.
+
+    PerlSetVar LDAPServer
+        This is the hostname of the LDAP server you wish to use.
+
+    PerlSetVar LDAPPort
+        This is the port the LDAP server is listening on.
+
+    PerlSetVar UIDAttr
+        The attribute used to lookup the user.
+
+  Uses for UIDAttr
+
+    For example if you set the UIDAttr to uid, then the LDAP search
+    filter will lookup a user using the search filter:
+
+    Normally you will use the uid attribute, but you may want (need)
+    to use a different attribute depending on your LDAP server or to
+    synchronize with different applications. For example some
+    versions of Novell's LDAP servers that I've encountered stored
+    the user's login name in the cn attribute (a really bad idea).
+    And the Netscape Address Book uses a user's email address as the
+    login id.
+
+INSTALLATION
+    It's a pretty straightforward install if you already have
+    mod_perl and Net::LDAP already installed.
+
+    After you have unpacked the distribution type:
+
+    perl Makefile.PL make make install
+
+    Then in your httpd.conf file or .htaccess file, in either a
+    <Directory> or <Location> section put:
+
+     AuthName "LDAP Test Auth"
+     AuthType Basic
+
+     #only set the next two if you need to bind as a user for searching
+     #PerlSetVar BindDN "uid=user1,ou=people,o=acme.com" #optional
+     #PerlSetVar BindPWD "password" #optional
+     PerlSetVar BaseDN "ou=people,o=acme.com"
+     PerlSetVar LDAPServer ldap.acme.com
+     PerlSetVar LDAPPort 389
+     PerlSetVar UIDAttr uid 
+
+     require valid-user
+
+     PerlAuthenHandler Apache::AuthNetLDAP
+
+HOMEPAGE
+            Module Home:http://courses.unt.edu/mewilcox/
+
+AUTHOR
+        Mark Wilcox mewilcox@unt.edu
+SEE ALSO
+   the Net::LDAP manpage
+ACKNOWLEDGMENTS
+     Graham Barr for writing Net::LDAP module.
+     Henrik Strom for writing the Apache::AuthPerLDAP module which I derived this from.
+     The O'Reilly "Programming Modules for Apache with Perl and C" (http://www.modperl.com).
+
+WARRANTY AND LICENSE
+You can distribute and modify in accordance to the same license as Perl. Though I would like to know how you are using the module or if you are using the module at all.
+    Like most of the stuff on the 'net, I got this copy to work for
+    me without destroying mankind, you're mileage may vary.
+
