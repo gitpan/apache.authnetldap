@@ -1,5 +1,5 @@
 AuthNetLDAP.pm
 Changes
-MANIFEST
 Makefile.PL
-README
+MANIFEST
+test.pl

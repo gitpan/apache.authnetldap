@@ -87,7 +87,7 @@ INSTALLATION
      PerlAuthenHandler Apache::AuthNetLDAP
 
 HOMEPAGE
-            Module Home:http://courses.unt.edu/mewilcox/
+            Module Home:http://perl-ldap.sourceforge.net/
 
 AUTHOR
         Mark Wilcox mewilcox@unt.edu
