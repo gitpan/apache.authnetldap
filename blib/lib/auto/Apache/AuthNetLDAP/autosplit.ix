@@ -1,3 +1,0 @@
-# Index created by AutoSplit for ./blib/lib/Apache/AuthNetLDAP.pm (file acts as timestamp)
-package Apache::AuthNetLDAP;
-1;
